@@ -46,6 +46,7 @@ class TransformerDecoder(nn.Module):
     def forward(self, x):
         B, T, C = x.shape
         pos_emd = self.linear_pos(self.pos_embed[:T, :])
+        x = x + pos_emd
         for block in self.blocks:
             x = block(x)
         return x
